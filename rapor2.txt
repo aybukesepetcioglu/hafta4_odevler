@@ -1,0 +1,18 @@
+GAUSS, SOBEL VE PREWITT KARŞILAŞTIRMASI NE YAPTIK?
+
+Pencereli iç mekan fotoğrafında kenarları bulmak için Sobel ve Prewitt filtrelerini denedik. Ancak kenar bulmadan önce fotoğrafa hafifçe Gauss yumuşatması uyguladık. 
+ 
+ NEDEN ÖNCE GAUSS UYGULADIK?
+
+Fotoğraftaki duvarda ufak pürüzler ve kumlanmalar vardı. Gauss filtresi bu gereksiz noktaları silerek temizledi; böylece filtrelerin sadece gerçek pencere ve duvar çizgilerini yakalamasını sağladık.  
+
+SOBEL VE PREWITT FARKI NEYDİ?
+
+Prewitt: Çevredeki tüm piksellere eşit değer verir, ayrım yapmaz.Sobel: Tam ortadaki piksele daha fazla ağırlık verir (2 katsayısı). Bu sayede kenarları bulurken kendi içinde de görüntüyü hafifçe toparlar.
+
+FOTOĞRAFTAKİ SONUÇLAR
+Dikey Çizgiler: Pencere parmaklıkları ve duvarın dik köşesi her ikisinde de çıktı. Ancak Sobel bu çizgileri daha parlak, kalın ve net gösterdi.  
+Yatay Çizgiler: Yatay cam bölmeleri ve zemin çizgisi ikisinde de başarıyla bulundu; dikey duvar çizgisi kayboldu.   Temizlik: Prewitt'te duvar ve cam arkasında yer yer gri noktalar kaldı. Sobel ise bu parazitleri yok edip daha temiz bir sonuç verdi.   
+
+ÖZET
+Gauss gereksiz pürüzleri engelledi. Prewitt işini yaptı ama biraz parazitli kaldı. Sobel ise ortadaki piksellere ağırlık verdiği için çizgileri hem daha parlak hem de çok daha temiz çıkardı. Bu fotoğrafta en iyi sonucu Sobel verdi.

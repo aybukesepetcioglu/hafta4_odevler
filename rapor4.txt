@@ -1,0 +1,22 @@
+CANNY KENAR TESPİTİ VE DİĞER ALGORİTMALARIN KARŞILAŞTIRMA RAPORU
+
+1. BİZ NE YAPTIK?
+Aynı pencere fotoğrafı üzerinde OpenCV'nin hazır Canny algoritmasını çalıştırdık. Elde ettiğimiz kenarları daha önce yaptığımız Sobel, Prewitt ve LoG filtreleriyle doğruluk ve çalışma süresi açısından kıyasladık.
+
+--------------------------------------------------
+
+2. DOĞRULUK VE GÖRSEL KALİTE AÇISINDAN KIYASLAMA
+- Sobel ve Prewitt: Kenarları buldu ama çizgiler oldukça kalın, gri tonlu ve yayvan çıktı. Ayrıca duvardaki bazı ton geçişlerini de kenar sandı.
+- 7x7 LoG: Kenarları ince buldu fakat çift çizgi efekti üretti ve matris hesaplaması biraz karmaşıktı.
+- Canny: En kusursuz sonucu verdi. Kenarları tam 1 piksel inceliğinde çizdi. Arka plandaki duvarı simsiyah bırakıp sadece pencere çerçevesi ve köşe gibi gerçek kenarları bembeyaz ve kesintisiz şekilde yakaladı.
+
+--------------------------------------------------
+
+3. ÇALIŞMA ZAMANI (PERFORMANS) AÇISINDAN KIYASLAMA
+- Sobel / Prewitt / LoG: Kendi elimizle konvolüsyon (filter2D) yaptığımız, mutlak değer ve karekök aldığımız için ortalama 10 - 20 ms civarında sürdü.
+- Canny: Arka planda 4 farklı aşama yapmasına rağmen OpenCV içinde C++ seviyesinde çok iyi optimize edildiği için yaklaşık 1 ms gibi rekor bir sürede tamamlandı.
+
+--------------------------------------------------
+
+4. SONUÇ
+Canny algoritması; hem gereksiz parazitleri tamamen elemesi ve kenarları tek piksel netliğinde çıkarması (doğruluk), hem de son derece hızlı çalışması (çalışma zamanı) açısından test ettiğimiz tüm yöntemler arasında en başarılı algoritma olmuştur.

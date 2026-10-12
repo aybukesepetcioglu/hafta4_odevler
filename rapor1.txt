@@ -1,0 +1,47 @@
+
+KENAR TESPİTİ OPERATÖRLERİ KARŞILAŞTIRMASI: SOBEL VE PREWITT
+
+1. GİRİŞ VE AMAÇ
+Bu çalışmada, görüntü işlemede kenar bulmak için en sık kullanılan iki temel yöntem olan Sobel ve Prewitt filtreleri test edilmiş ve sonuçları karşılaştırılmıştır. 
+
+Her iki filtre de türev tabanlı çalıştığından, görüntüdeki ani renk ve ışık değişimlerine fazlasıyla duyarlıdır. Bu sebeple işlem öncesinde, duvardaki ve yüzeylerdeki ince pürüzlerin hatalı kenar gibi görünmesini engellemek amacıyla görüntüye 3x3 boyutunda Gauss yumuşatma filtresi uygulanmıştır.
+
+--------------------------------------------------
+
+2. OPERATÖRLERİN ÇALIŞMA MANTIĞI VE FARKLARI
+
+Görüntüde kenarlar, pikseller arasındaki parlaklık farkının hızla değiştiği yerlerdir. Bu değişimi ölçmek için yatay ve dikey yönlerde türev alınır.
+
+- Prewitt Operatörü:
+Matrisindeki tüm komşu piksel değerlerine eşit ağırlık (-1 ve 1) verir. Sadece yan yana ya da alt alta piksellerin farkına bakar.
+
+- Sobel Operatörü:
+Prewitt gibi çalışır ancak orta satır ve sütundaki piksellere 2 katsayısı vererek merkeze daha fazla ağırlık tanır. Bu ağırlıklandırma, türev alma işlemi sırasında görüntünün o bölgesine otomatik olarak hafif bir yumuşatma etkisi katar.
+
+Son aşamada, yatay ve dikey yönde bulunan kenar değerlerinin kareleri toplanıp karekökü alınarak görüntünün nihai (bileşke) kenar haritası oluşturulur.
+
+--------------------------------------------------
+
+3. TEST GÖRÜNTÜSÜ ÜZERİNDEKİ GÖZLEMLER
+
+Test edilen görselde; solda çok sayıda kare bölmesi olan bir pencere, ortada ışık alan açık tonlu bir duvar ve sağ tarafta karanlık bir alan yer almaktadır.
+
+- Dikey Kenarlar:
+Hem Sobel hem de Prewitt, pencerenin dikey çerçevelerini ve beyaz duvar ile siyah alan arasındaki keskin çizgiyi başarıyla tespit etmiştir. Ancak Sobel filtresi, merkeze verdiği ağırlık sayesinde bu dikey sınırı Prewitt'e göre daha kalın, parlak ve kesintisiz bir çizgi olarak yakalamıştır.
+
+- Yatay Kenarlar:
+Her iki filtre de pencere camlarının yatay çıtalarını, alt pencere pervazını ve zemin çizgisini net bir şekilde bulmuştur. Yönsel türev mantığı gereği, her iki yöntemde de dikey duvar çizgileri yatay filtrede tamamen yok olmuştur.
+
+- Gürültü ve Doku Tepkisi:
+Prewitt filtresinde, duvardaki hafif ton geçişleri ve cam arkasındaki pürüzler yer yer gereksiz zayıf çizgiler olarak belirmiştir. Sobel ise merkez ağırlığı sayesinde bu ufak dalgalanmaları bastırmış, sadece belirgin ana kenarları öne çıkarmıştır.
+
+- Toplam Kenar Haritası:
+İki yön birleştirildiğinde, Sobel operatörünün oluşturduğu kenar çizgilerinin daha parlak, tok ve birbirine daha iyi bağlandığı görülmüştür. Prewitt'in kenarları ise biraz daha ince kalmış ve bazı yerlerde parazitli görünmüştür.
+
+--------------------------------------------------
+
+4. DEĞERLENDİRME VE SONUÇ
+
+- Hesaplama Hızı: Prewitt sadece çıkarma ve toplama yaptığı için çok az bir miktar daha basittir. Sobel'deki 2 ile çarpma işlemi ise bilgisayarda çok hızlı çalıştığı için iki filtre arasında hissedilir bir performans farkı yoktur.
+- Gürültüye Dayanıklılık: Sobel, merkez piksellere ağırlık verdiği için gürültüyü bastırmada ve temiz kenar üretmede Prewitt'ten açıkça daha başarılıdır.
+- Sonuç: Denenen pencere görselinde her iki algoritma da yönsel kenarları doğru şekilde ayırt etmiştir. Ancak Sobel operatörü, hem pencere pervazları gibi detayları hem de duvarın köşe hattını daha az pürüz ve daha yüksek kontrast ile yakalayarak daha başarılı bir kenar haritası sunmuştur.

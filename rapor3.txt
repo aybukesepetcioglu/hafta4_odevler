@@ -1,0 +1,16 @@
+7x7 LoG VE DİĞER FİLTRELERİN KARŞILAŞTIRMA RAPORU
+
+AMAÇ
+Bu çalışmada, pencereli iç mekan fotoğrafında kenarları bulmak için 7x7 LoG (Laplacian of Gaussian) filtresi uygulanmış; elde edilen sonuçlar Gauss yumuşatması yapılmış ve yapılmamış diğer filtrelerle kıyaslanmıştır. 
+
+ GÖZLEMLER VE KARŞILAŞTIRMA
+
+Gauss Uygulanmamış (Ham) Filtreler: Ham Sobel ve ham Laplacian filtreleri, duvardaki ve yüzeylerdeki en ufak pürüzleri dahi kenar zannederek parazitli, kirli bir sonuç üretmiştir.
+  
+Gauss Uygulanmış Sobel: Öncesinde yapılan yumuşatma sayesinde parazitler silinmiş; pencere çıtaları ve duvar köşesi kalın, tok ve net çizgiler halinde çıkmıştır.   
+
+7x7 LoG Filtresi: Matris kendi içinde Gauss yumuşatması barındırdığı için tek 
+adımda uygulanmıştır. Arka plandaki pürüzleri tamamen yok etmiş; kenarları Sobel gibi kalınlaştırmadan son derece ince ve detaylı olarak tespit etmiştir.
+   
+SONUÇ
+Gauss yumuşatması yapılmadığında filtreler gürültüye kanarak hatalı kenarlar üretmektedir. Sobel kalın ve belirgin nesne sınırları çıkarırken; 7x7 LoG filtresi hem gürültüyü tek adımda bastırmış hem de kenarları en ince ayrıntısına kadar temiz bir şekilde ortaya çıkarmıştır.   
